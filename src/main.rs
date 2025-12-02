@@ -4,9 +4,12 @@ mod physics;
 
 use crate::physics::body;
 use game::world::World;
+use physics::collision::ParticleType;
 
 // Cambio la configuracion inicial del window
 // Por alguna razon no es posible hacer que se centre
+
+// dt es delta time y es importante para la actualizacion del mundo
 
 fn window_conf() -> Conf {
     Conf {
@@ -30,7 +33,7 @@ async fn main() {
 
         // Cambios
         if is_mouse_button_down(MouseButton::Left) {
-            let body = body::Body::new(mouse_pos);
+            let body = body::Body::new(mouse_pos, Some(ParticleType::Sand));
             world.add_body(body);
         }
         world.update(dt);
